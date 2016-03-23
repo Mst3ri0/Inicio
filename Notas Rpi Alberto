@@ -1,1 +1,51 @@
 
+Raspberry Pi no tiene ningún botón de encendido y apagado pero no por ello debemos tirar del cable sin más: 
+esto puede causar grandes problemas, siendo el mayor la corrupción de los archivos de la SD y el tener que 
+volver a instalar todo de nuevo para que arranque.
+
+Desde la línea de comandos se puede utilizar para apagar:
+
+sudo shutdown -h now
+o para reiniciar:
+ sudo reboot -f
+
+
+actualizar sistema operativo
+
+sudo apt-get update
+NANO
+En la notación de los atajos la tecla Ctrl o Control se representa con el acento circunflejo (^).
+
+Si en cualquier momento queréis volver a iniciar la configuración podréis hacerlo escribiendo:
+sudo raspi-config
+
+Iniciar modo grafico
+startx
+
+Estado de el adaptador wifi
+iwconfig
+
+WIFI
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+Actualizar Raspbian y raspi_config
+sudo apt-get update && sudo apt-get install raspberrypi* raspi-config
+
+Instalar wpa_gui
+sudo apt-get install wpagui
+
+Editar configuracion del wpa tiene que quedar asi
+
+sudo nano /etc/network/interfaces and append the following to it.
+allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
+
+Now create a new file /etc/wpa_supplicant/wpa_supplicant.conf with the following contents:
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+Meter Pi en grupo netdev y darle permisos
+sudo chmod 600 /etc/wpa_supplicant/wpa_supplicant.conf
+sudo adduser pi netdev
