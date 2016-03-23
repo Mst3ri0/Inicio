@@ -1,1 +1,21 @@
 
+Problemas espacio de disco Ubuntu:
+
+	sudo fdisk /dev/mmcblk0
+	d enter		2 enter		n enter		p enter
+	2 enter		enter		enter		w
+	Reboot
+	sudo resize2fs /dev/mmcblk0p2
+
+Actualizar
+
+	apt-get update
+	apt-get dist-upgrrade
+ 
+Instalar Arduino				sudo apt-get install arduino
+Comprobar que funciona conectarlo y 	dmesg | grep ttyACM	
+Si funciona nos devuelve			ttyACM0: USB ACM device
+Dar permisos al puerto			sudo chmod 666 /dcv/ttyACM0
+Ubunto me detectó la placa y en la interace gráfica me salió un mensaje para aceptar los permisos, este último comando no lo ejecuté.
+En el Ide Arduino elegir el puerto al que está conectado en:
+Herramientas / Puerto Serial.
